@@ -9,6 +9,7 @@
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body class="lang-en">
@@ -104,10 +105,39 @@
                 <h3>Elegant Home</h3>
                 <p id="footer-tagline" data-en="Excellence in every detail." data-ar="التميز في كل تفصيل.">Excellence in
                     every detail.</p>
-                <div class="social-links">
-                    <a href="https://www.facebook.com/share/17Yy87tutK/" target="_blank" class="social-icon facebook"
-                        title="Facebook">Facebook</a>
+
+                <div class="commercial-info"
+                    style="margin-top: 15px; font-size: 0.9rem; line-height: 1.6; color: var(--off-white, #F9F7F2); opacity: 0.85;">
+                    <p id="footer-commercial-reg" data-en="Commercial Register No: 105089 (Limited Liability)"
+                        data-ar="مستخرج سجل تجاري رقم : ١٠٥٠٨٩ (ذات مسئولية محدودة)">
+                        Commercial Register No: 105089 (Limited Liability)
+                    </p>
+                    <p id="footer-national-id" data-en="National Entity ID: 542717433"
+                        data-ar="الرقم القومي للمنشآة:  ٥٤٢٧١٧٤٣٣">
+                        National Entity ID: 542717433
+                    </p>
                 </div>
+
+                <ul class="video-social-menu">
+                    <li class="video-social-item" style="--clr:#1877F2;">
+                        <a href="https://www.facebook.com/share/17Yy87tutK/" target="_blank">
+                            <i class="fa-brands fa-facebook-f video-icon"></i>
+                            <span class="video-title" data-en="Facebook" data-ar="فيسبوك">Facebook</span>
+                        </a>
+                    </li>
+                    <li class="video-social-item" style="--clr:#25D366;">
+                        <a href="https://wa.me/201143925505" target="_blank">
+                            <i class="fa-brands fa-whatsapp video-icon"></i>
+                            <span class="video-title" data-en="WhatsApp" data-ar="واتساب">WhatsApp</span>
+                        </a>
+                    </li>
+                    <li class="video-social-item" style="--clr:#4285F4;">
+                        <a href="https://maps.app.goo.gl/imaVHF8WGBqpA6VdA?g_st=iw" target="_blank">
+                            <i class="fa-solid fa-map-location-dot video-icon"></i>
+                            <span class="video-title" data-en="Google Maps" data-ar="خرائط جوجل">Google Maps</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
 
             <div class="footer-col">
@@ -125,12 +155,7 @@
                         <span class="icon">📞</span>
                         <a href="tel:01129999796" class="phone-link"><span class="phone-num">01129999796</span></a>
                     </li>
-                    <li>
-                        <span class="icon">💬</span>
-                        <a href="https://wa.me/201143925505" target="_blank" class="whatsapp-link">
-                            WhatsApp: <span class="phone-num">01143925505</span>
-                        </a>
-                    </li>
+            
                 </ul>
             </div>
 
@@ -141,10 +166,7 @@
                     data-ar="العنوان: مكتب ١٠ الدور الثاني، جراند مول خلف بنزينه توتال الحي الثالث شرق.">
                     Office 10, Second Floor, Grand Mall, Behind Total Energies Gas Station, Third District East.
                 </p>
-                <a href="https://maps.app.goo.gl/imaVHF8WGBqpA6VdA?g_st=iw" target="_blank" class="map-link-btn"
-                    id="map-btn" data-en="Find us on Google Maps" data-ar="موقعنا على الخريطة">
-                    Find us on Google Maps
-                </a>
+            
             </div>
 
         </div>
@@ -245,6 +267,88 @@
                 right: auto;
                 left: 20px;
             }
+        }
+
+        /* -------------------------------------------------------------
+           تنسيقات تأثير أيقونات التواصل الاجتماعي الحركي (Hover Effect) طبقاً للفيديو
+           ------------------------------------------------------------- */
+        .video-social-menu {
+            display: flex;
+            gap: 15px;
+            padding: 0;
+            margin: 20px 0 0 0;
+            list-style: none;
+            align-items: center;
+        }
+
+        .video-social-item {
+            position: relative;
+            list-style: none;
+            width: 50px;
+            height: 50px;
+            background: #ffffff;
+            border-radius: 60px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: width 0.5s, background-color 0.5s;
+            transition-delay: 0s;
+            overflow: hidden;
+        }
+
+        .video-social-item:hover {
+            width: 160px;
+            background-color: var(--clr);
+        }
+
+        .video-social-item a {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .video-social-item .video-icon {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 50px;
+            height: 50px;
+            font-size: 1.4rem;
+            transition: 0.5s;
+            transition-delay: 0s;
+        }
+
+        .video-social-item:hover .video-icon {
+            color: #fff;
+            transform: rotate(360deg);
+        }
+
+        .video-social-item .video-title {
+            position: relative;
+            padding-left: 0px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.05em;
+            transition: 0.5s;
+            opacity: 0;
+            visibility: hidden;
+            white-space: nowrap;
+        }
+
+        /* عند تحويل الواجهة للغة العربية يتم تعديل اتجاه التباعد */
+        body.rtl .video-social-item .video-title {
+            font-family: Arial, sans-serif;
+        }
+
+        .video-social-item:hover .video-title {
+            color: #fff;
+            opacity: 1;
+            visibility: visible;
         }
     </style>
 

@@ -22,16 +22,17 @@ const content = {
         footerContact: "Contact Us",
         footerLoc: "Our Location",
         footerAddr: "Office 10, Second Floor, Grand Mall, Behind Total Energies Gas Station, Third District East.",
-        mapBtn: "Find us on Google Maps"
+        Commercial:"Commercial Register No: 105089(Limited Liability)",
+        National: "National Entity ID: 542717433"
     },
     ar: {
-        brand1: "إليجانت",
+        brand1: "الجينت",
         brand2: "هوم",
         finishing: "تشطيبات",
         supplies: "توريدات وتجارة ▾",
         lighting: "الإضاءة ▾",
         components: "مشتملات ▾",
-        welcome: "✦ أهلاً بكم في إليجانت هوم ✦",
+        welcome: "✦ أهلاً بكم في الجينت هوم ✦",
         title: "للخدمات التجارية و <i>المقاولات</i>",
         desc: "مهمتنا هي جعل العميل واثقاً في خدمتنا ومطمئناً في كل خطوة.",
         san: "سانشي", osa: "أوسا", sha: "شرم", ven: "فينوس",
@@ -45,7 +46,8 @@ const content = {
         footerContact: "اتصل بنا",
         footerLoc: "موقعنا",
         footerAddr: "العنوان: مكتب ١٠ الدور الثاني، جراند مول خلف بنزينه توتال الحي الثالث شرق.",
-        mapBtn: "موقعنا على الخريطة"
+        Commercial: "مستخرج سجل تجاري رقم : ١٠٥٠٨٩ (ذات مسئولية محدودة)",
+        National: "الرقم القومي للمنشآة:  ٥٤٢٧١٧٤٣٣" 
     }
 };
 
@@ -89,5 +91,7 @@ document.getElementById('langBtn').addEventListener('click', () => {
     document.getElementById('footer-contact-title').innerText = content[currentLang].footerContact;
     document.getElementById('footer-location-title').innerText = content[currentLang].footerLoc;
     document.getElementById('footer-address').innerText = content[currentLang].footerAddr;
-    document.getElementById('map-btn').innerText = content[currentLang].mapBtn;
-});
+    document.getElementById('footer-commercial-reg').innerText = content[currentLang].Commercial;
+    document.getElementById('footer-national-id').innerText = content[currentLang].National;
+    
+}); 
