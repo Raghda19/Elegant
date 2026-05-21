@@ -478,10 +478,7 @@ footer {
 }
 
 /* --- RTL SUPPORT --- */
-[dir="rtl"] .nav-container,
-[dir="rtl"] .brand {
-    flex-direction: row-reverse;
-}
+
 
 [dir="rtl"] .hero-grid {
     direction: rtl;
@@ -492,4 +489,88 @@ footer {
     font-weight: 700;
     margin-bottom: 30px;
     letter-spacing: 0;
+}
+
+/* ==========================================================================
+   NEW RESPONSIVE MEDIA QUERIES FOR MOBILE PHONE RETENTION (BELOW 991px)
+   ================================================================base_url_config ========== */
+@media (max-width: 991px) {
+    .container {
+        padding: 0 20px;
+    }
+
+    /* Hero adjustments */
+    .hero {
+        padding: 40px 0;
+        min-height: auto;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+        /* Drop side-by-side display */
+        gap: 40px;
+        text-align: center;
+    }
+
+    .hero-text h1 {
+        font-size: 2.6rem;
+        /* Scale down oversized text safely */
+    }
+
+    .hero-text h4 {
+        white-space: normal;
+    }
+
+    .hero-text p {
+        margin: 0 auto 30px auto;
+    }
+
+    .hero-image-area {
+        justify-content: center;
+    }
+
+    .image-frame {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Footer adjustments */
+    .footer-container {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .contact-list li {
+        justify-content: center;
+    }
+
+    .video-social-menu {
+        justify-content: center;
+    }
+
+    /* Alignment adjustments for alternative languages on mobile */
+    .lang-ar .contact-list li {
+        justify-content: center;
+    }
+
+    [dir="rtl"] .hero-grid {
+        direction: ltr;
+        /* Keeps stacking order natural on mobile grids */
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-text h1 {
+        font-size: 2.1rem;
+    }
+
+    .brand-text h2 {
+        font-size: 1.3rem;
+    }
+
+    .nav-logo {
+        width: 50px;
+        height: 50px;
+    }
 }

@@ -24,7 +24,11 @@
                 </div>
             </div>
 
-            <ul class="nav-links">
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigationMenu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
                 <li><a href="finishing.html" id="nav-finishing" class="nav-item">FINISHING</a></li>
 
                 <li class="dropdown">
@@ -155,7 +159,6 @@
                         <span class="icon">📞</span>
                         <a href="tel:01129999796" class="phone-link"><span class="phone-num">01129999796</span></a>
                     </li>
-            
                 </ul>
             </div>
 
@@ -166,7 +169,6 @@
                     data-ar="العنوان: مكتب ١٠ الدور الثاني، جراند مول خلف بنزينه توتال الحي الثالث شرق.">
                     Office 10, Second Floor, Grand Mall, Behind Total Energies Gas Station, Third District East.
                 </p>
-            
             </div>
 
         </div>
@@ -178,6 +180,20 @@
     <button id="scrollToTopBtn" aria-label="Scroll to top" title="Go to top">✦</button>
 
     <style>
+        /* Ensures the brand setup remains pinned horizontally to the left regardless of RTL context states */
+        body.rtl .nav-container {
+            flex-direction: row !important;
+        }
+
+        body.rtl .brand {
+            flex-direction: row !important;
+            margin-right: auto;
+        }
+
+        body.rtl .nav-links {
+            flex-direction: row-reverse !important;
+        }
+
         /* Matches footer background to the luxury portfolio theme palette variables */
         footer {
             background-color: var(--dark-brown, #2C1B18) !important;
@@ -270,7 +286,7 @@
         }
 
         /* -------------------------------------------------------------
-           تنسيقات تأثير أيقونات التواصل الاجتماعي الحركي (Hover Effect) طبقاً للفيديو
+           تنسيقات تأثير أيقونات التواصل الاجتماعي الحركي (Hover / Active Effect)
            ------------------------------------------------------------- */
         .video-social-menu {
             display: flex;
@@ -290,12 +306,14 @@
             border-radius: 60px;
             cursor: pointer;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            transition: width 0.5s, background-color 0.5s;
-            transition-delay: 0s;
+            transition: width 0.4s ease, background-color 0.4s ease;
             overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .video-social-item:hover {
+        /* Hover animation rule for desktops and Active rule for touch mobile pointers */
+        .video-social-item:hover,
+        .video-social-item.expanded {
             width: 160px;
             background-color: var(--clr);
         }
@@ -318,43 +336,106 @@
             min-width: 50px;
             height: 50px;
             font-size: 1.4rem;
-            transition: 0.5s;
-            transition-delay: 0s;
+            transition: color 0.4s ease, transform 0.4s ease;
         }
 
-        .video-social-item:hover .video-icon {
+        .video-social-item:hover .video-icon,
+        .video-social-item.expanded .video-icon {
             color: #fff;
             transform: rotate(360deg);
         }
 
         .video-social-item .video-title {
             position: relative;
-            padding-left: 0px;
+            padding-left: 5px;
             font-family: 'Montserrat', sans-serif;
             font-weight: 500;
             font-size: 0.95rem;
             letter-spacing: 0.05em;
-            transition: 0.5s;
+            transition: color 0.4s ease, opacity 0.4s ease, visibility 0.4s ease;
             opacity: 0;
             visibility: hidden;
             white-space: nowrap;
         }
 
-        /* عند تحويل الواجهة للغة العربية يتم تعديل اتجاه التباعد */
+        /* Adjust alignment metrics context when document direction switches to RTL */
         body.rtl .video-social-item .video-title {
             font-family: Arial, sans-serif;
+            padding-left: 0;
+            padding-right: 5px;
         }
 
-        .video-social-item:hover .video-title {
+        .video-social-item:hover .video-title,
+        .video-social-item.expanded .video-title {
             color: #fff;
             opacity: 1;
             visibility: visible;
+        }
+
+        /* --- MOBILE LOGIC FOR NAVIGATION --- */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--luxury-brown, #3D2817);
+            font-size: 1.6rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 991px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #D4C5B9;
+                padding: 20px;
+                gap: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                border-top: 1px solid rgba(184, 160, 122, 0.2);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .dropdown-content {
+                position: relative;
+                top: 0;
+                box-shadow: none;
+                background: rgba(255, 255, 255, 0.4);
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+
+            /* Keep structural layouts optimized when dropdown responsive menus match mobile displays in RTL rules */
+            body.rtl .nav-links {
+                flex-direction: column !important;
+            }
         }
     </style>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const scrollBtn = document.getElementById("scrollToTopBtn");
+            const menuToggle = document.getElementById("menuToggle");
+            const navLinks = document.getElementById("navLinks");
+            const socialItems = document.querySelectorAll(".video-social-item");
+
+            // Mobile menu toggle click handling
+            menuToggle.addEventListener("click", function () {
+                navLinks.classList.toggle("active");
+            });
 
             // Monitor window scroll coordinates to reveal or conceal button
             window.addEventListener("scroll", function () {
@@ -372,6 +453,27 @@
                     behavior: "smooth"
                 });
             });
+
+            // Touch interaction logic for mobile devices to cleanly trigger button expansions
+            socialItems.forEach(item => {
+                item.addEventListener("touchstart", function (e) {
+                    // Check if it's already expanded
+                    if (!this.classList.contains("expanded")) {
+                        e.preventDefault(); // Stop immediate link redirect
+                        // Collapse any other open items
+                        socialItems.forEach(i => i.classList.remove("expanded"));
+                        // Expand current item
+                        this.classList.add("expanded");
+                    }
+                }, { passive: false });
+            });
+
+            // Collapse social handles instantly when user taps anywhere else on the interface
+            document.addEventListener("touchstart", function (e) {
+                if (!e.target.closest(".video-social-item")) {
+                    socialItems.forEach(item => item.classList.remove("expanded"));
+                }
+            }, { passive: true });
         });
     </script>
 

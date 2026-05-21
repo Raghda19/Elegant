@@ -35,11 +35,17 @@
             overflow-x: hidden;
         }
 
+        body.rtl {
+            direction: rtl;
+        }
+
         /* Circular Gold Frame Navbar */
         header {
             background: #D4C5B9;
             padding: 15px 0;
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 100;
         }
 
         .nav-container {
@@ -72,7 +78,7 @@
         .brand-text h2 {
             font-family: 'Playfair Display', serif;
             font-size: 1.6rem;
-            color:  var(--luxury-brown);
+            color: var(--dark-brown);
             line-height: 0.9;
             margin: 0;
         }
@@ -100,23 +106,69 @@
         }
 
         /* Gold Pill Button */
-       .lang-switch {
-            background: var(--luxury-brown);
-            color: var(--white);
-            border: 1px solid var(--luxury-brown);
+        .lang-switch {
+            background: var(--dark-brown);
+            color: var(--off-white);
+            border: 1px solid var(--dark-brown);
             padding: 10px 24px;
-            font-family: var(--font-sans);
+            font-family: 'Montserrat', sans-serif;
             font-weight: 600;
             font-size: 0.8rem;
             border-radius: 50px;
             cursor: pointer;
-            transition: var(--transition-smooth);
+            transition: all 0.3s ease;
         }
-        
+
         .lang-switch:hover {
             background: transparent;
-            color: var(--luxury-brown);
+            color: var(--dark-brown);
         }
+
+        /* --- MOBILE MENU TOGGLE COMPONENT GRAPHIC --- */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .hamburger-icon {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: var(--dark-espresso);
+            position: relative;
+            transition: background 0.3s ease;
+        }
+
+        .hamburger-icon::before,
+        .hamburger-icon::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 3px;
+            background: var(--dark-espresso);
+            left: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .hamburger-icon::before {
+            top: -8px;
+        }
+
+        .hamburger-icon::after {
+            bottom: -8px;
+        }
+
+        /* RTL Navbar Flow Directions */
+         body.rtl .nav-container {
+             flex-direction: row;
+         }
+         body.rtl .nav-links {
+             flex-direction: row-reverse;
+         }
+
         /* --- PORTFOLIO GALLERY STYLES --- */
         .tabs-section {
             padding: 60px 10%;
@@ -131,7 +183,7 @@
             flex-wrap: wrap;
         }
 
-         .tab-btn {
+        .tab-btn {
             background: #D4C5B9;
             border: 1px solid var(--gold);
             color: var(--gold);
@@ -167,7 +219,7 @@
         .gallery-card {
             background: var(--dark-brown);
             border: 2px solid rgba(197, 160, 89, 0.8);
-            padding: 10px ;
+            padding: 10px;
             border-radius: 5px;
             transition: 0.3s;
         }
@@ -197,6 +249,97 @@
                 transform: translateY(0);
             }
         }
+
+        /* --- MOBILE RESPONSIVE MEDIA BREAKPOINTS --- */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 20px;
+            }
+
+            .brand-text h2 {
+                font-size: 1.3rem;
+            }
+
+            .nav-logo {
+                width: 45px;
+                height: 45px;
+            }
+
+            .menu-toggle {
+                display: block;
+                z-index: 110;
+            }
+
+            /* Stack vertical dropdown menu container */
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #D4C5B9;
+                padding: 30px 20px;
+                gap: 20px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+                border-top: 1px solid rgba(0, 0, 0, 0.05);
+                text-align: center;
+                z-index: 99;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            /* Forces Arabic vertical stack inside the dropdown exactly like English */
+            body.rtl .nav-links.active {
+                flex-direction: column;
+            }
+
+            .nav-item {
+                font-size: 1rem;
+                display: block;
+                padding: 5px 0;
+            }
+
+            .lang-switch {
+                width: 100%;
+                max-width: 200px;
+                margin: 5px auto 0 auto;
+            }
+
+            /* Main Content Adjustments */
+            .tabs-section {
+                padding: 40px 20px;
+            }
+
+            .tab-buttons {
+                gap: 10px;
+                margin-bottom: 30px;
+            }
+
+            .tab-btn {
+                padding: 10px 16px;
+                font-size: 0.8rem;
+                letter-spacing: 1px;
+                flex: 1 1 calc(50% - 10px);
+                min-width: 130px;
+            }
+
+            /* Adaptive Grid Scaling */
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 12px;
+            }
+
+            .gallery-card {
+                padding: 6px;
+            }
+
+            .gallery-img {
+                height: 160px;
+            }
+        }
     </style>
 </head>
 
@@ -210,7 +353,12 @@
                     <h2 id="brand-sub">Home</h2>
                 </div>
             </div>
-            <ul class="nav-links">
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+                <span class="hamburger-icon"></span>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
                 <li><a href="index.html" class="nav-item" id="nav-home">Home</a></li>
                 <li><a href="lighting.html" class="nav-item active" id="nav-lighting">LIGHTING</a></li>
                 <li><button class="lang-switch" id="langBtn">EN / AR</button></li>
@@ -293,7 +441,7 @@
         });
     </script>
     <button id="scrollToTopBtn" aria-label="Scroll to top" title="Go to top">✦</button>
-    
+
     <style>
         /* Scroll to Top Button Styling */
         #scrollToTopBtn {
@@ -313,34 +461,34 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    
+
             /* Animation States */
             opacity: 0;
             visibility: hidden;
             transform: translateY(20px);
             transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease, background-color 0.3s ease, color 0.3s ease;
         }
-    
+
         /* Show State triggered by JavaScript */
         #scrollToTopBtn.show {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
         }
-    
+
         /* Elegant Hover Transition effect */
         #scrollToTopBtn:hover {
             background-color: var(--gold, #C5A059);
             color: var(--dark-brown, #2C1B18);
             box-shadow: 0 6px 20px rgba(197, 160, 89, 0.4);
         }
-    
+
         /* Dynamic Adjustments for RTL/Arabic layout structure */
         body.rtl #scrollToTopBtn {
             right: auto;
             left: 30px;
         }
-    
+
         /* Responsive Breakpoints: Tablet (iPad) & Mobile Devices */
         @media (max-width: 768px) {
             #scrollToTopBtn {
@@ -350,17 +498,32 @@
                 height: 44px;
                 font-size: 1.25rem;
             }
-    
+
             body.rtl #scrollToTopBtn {
                 right: auto;
                 left: 20px;
             }
         }
     </style>
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const scrollBtn = document.getElementById("scrollToTopBtn");
+            const menuToggle = document.getElementById("menuToggle");
+            const navLinks = document.getElementById("navLinks");
+
+            // Unified mobile menu event listener for both languages
+            menuToggle.addEventListener("click", function (e) {
+                e.stopPropagation();
+                navLinks.classList.toggle("active");
+            });
+
+            // Close layout drawer symmetrically if user clicks outside context bounds
+            document.addEventListener("click", function (e) {
+                if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+                    navLinks.classList.remove("active");
+                }
+            });
 
             // Monitor window scroll coordinates to reveal or conceal button
             window.addEventListener("scroll", function () {

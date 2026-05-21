@@ -39,11 +39,13 @@
             direction: rtl;
         }
 
-        /* --- NAVBAR (Updated to match finishing.html) --- */
+        /* --- NAVBAR --- */
         header {
             background: #D4C5B9;
             padding: 20px 0;
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 100;
         }
 
         .nav-container {
@@ -53,6 +55,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            /* Allows menu to drop downward below header logo */
         }
 
         .brand {
@@ -76,28 +80,29 @@
         .brand-text h2 {
             font-family: 'Playfair Display', serif;
             font-size: 1.6rem;
-            color:  var(--luxury-brown);
+            color: var(--dark-brown);
             line-height: 0.9;
         }
 
         /* --- LANGUAGE SWITCH BUTTON --- */
         .lang-switch {
-            background: var(--luxury-brown);
-            color: var(--white);
-            border: 1px solid var(--luxury-brown);
+            background: var(--dark-brown);
+            color: var(--off-white);
+            border: 1px solid var(--dark-brown);
             padding: 10px 24px;
-            font-family: var(--font-sans);
+            font-family: 'Montserrat', sans-serif;
             font-weight: 600;
             font-size: 0.8rem;
             border-radius: 50px;
             cursor: pointer;
-            transition: var(--transition-smooth);
+            transition: all 0.3s ease;
         }
-        
+
         .lang-switch:hover {
             background: transparent;
-            color: var(--luxury-brown);
+            color: var(--dark-brown);
         }
+
         .nav-links {
             display: flex;
             align-items: center;
@@ -119,9 +124,52 @@
             color: var(--gold);
         }
 
-        
+        /* --- MOBILE MENU TOGGLE GRAPHIC --- */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+        }
 
-        /* --- REMAINDER OF PAGE CONTENT (Unchanged) --- */
+        .hamburger-icon {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: var(--dark-espresso);
+            position: relative;
+            transition: background 0.3s ease;
+        }
+
+        .hamburger-icon::before,
+        .hamburger-icon::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 3px;
+            background: var(--dark-espresso);
+            left: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .hamburger-icon::before {
+            top: -8px;
+        }
+
+        .hamburger-icon::after {
+            bottom: -8px;
+        }
+
+        /* RTL Navbar Flow Directions */
+         body.rtl .nav-container {
+             flex-direction: row;
+         }
+         body.rtl .nav-links {
+             flex-direction: row-reverse;
+         }
+
+        /* --- REMAINDER OF PAGE CONTENT --- */
         .tabs-section {
             padding: 80px 10%;
             text-align: center;
@@ -171,7 +219,7 @@
         .gallery-card {
             background: var(--dark-brown);
             border: 2px solid rgba(197, 160, 89, 0.8);
-            padding: 10px ;
+            padding: 10px;
             border-radius: 5px;
             transition: 0.3s;
         }
@@ -201,6 +249,97 @@
                 transform: translateY(0);
             }
         }
+
+        /* --- MOBILE RESPONSIVE MEDIA BREAKPOINTS --- */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 20px;
+            }
+
+            .brand-text h2 {
+                font-size: 1.3rem;
+            }
+
+            .nav-logo {
+                width: 45px;
+                height: 45px;
+            }
+
+            .menu-toggle {
+                display: block;
+                z-index: 110;
+            }
+
+            /* Expands vertically directly downward underneath the logo header bar */
+            .nav-links {
+                display: none;
+                /* Hidden by default until toggled */
+                flex-direction: column !important;
+                /* Force column view for both EN and AR */
+                width: 100%;
+                background: #D4C5B9;
+                padding: 20px 0;
+                gap: 20px;
+                text-align: center;
+                z-index: 99;
+                margin-top: 15px;
+                border-top: 1px solid rgba(0, 0, 0, 0.05);
+            }
+
+            /* Overrides the 'row-reverse' configurations entirely on mobile dropdown views */
+            body.rtl .nav-links {
+                flex-direction: column !important;
+            }
+
+            /* Displayed inline block downward when requested */
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-item {
+                font-size: 1rem;
+                display: block;
+                padding: 5px 0;
+            }
+
+            .lang-switch {
+                width: auto;
+                display: inline-block;
+                margin: 5px auto 0 auto;
+            }
+
+            /* Main Content Adjustments */
+            .tabs-section {
+                padding: 40px 20px;
+            }
+
+            .tab-buttons {
+                gap: 10px;
+                margin-bottom: 35px;
+            }
+
+            .tab-btn {
+                padding: 10px 20px;
+                font-size: 0.85rem;
+                letter-spacing: 1px;
+                flex: 1 1 calc(50% - 10px);
+                min-width: 120px;
+            }
+
+            /* Adaptive Grid Scaling */
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 12px;
+            }
+
+            .gallery-card {
+                padding: 6px;
+            }
+
+            .gallery-img {
+                height: 160px;
+            }
+        }
     </style>
 </head>
 
@@ -214,9 +353,15 @@
                     <h2 id="brand-sub">Home</h2>
                 </div>
             </div>
-            <ul class="nav-links">
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+                <span class="hamburger-icon"></span>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
                 <li><a href="index.html" id="nav-home" class="nav-item">HOME</a></li>
-                <li><a href="supplies&trading.html" id="nav-supplies" class="nav-item active">SUPPLIES & TRADING</a></li>
+                <li><a href="supplies&trading.html" id="nav-supplies" class="nav-item active">SUPPLIES & TRADING</a>
+                </li>
                 <li><button class="lang-switch" id="langBtn">EN / AR</button></li>
             </ul>
         </nav>
@@ -253,25 +398,25 @@
             document.getElementById('tab-' + id).classList.add('active');
         }
 
-        // Update your function definition to accept the 'limit' parameter
-            function generateGallery(containerId, folder, prefix, limit) {
-                const grid = document.getElementById(containerId);
-                grid.innerHTML = ''; // Clears existing to prevent duplicates if script runs twice
-                for (let i = 1; i <= limit; i++) {
-                    const card = document.createElement('div');
-                    card.className = 'gallery-card';
-                    const img = document.createElement('div');
-                    img.className = 'gallery-img';
-                    img.style.backgroundImage = `url('${folder}/${prefix}${i}.jpg')`;
-                    card.appendChild(img);
-                    grid.appendChild(card);
-                }
+        function generateGallery(containerId, folder, prefix, limit) {
+            const grid = document.getElementById(containerId);
+            grid.innerHTML = '';
+            for (let i = 1; i <= limit; i++) {
+                const card = document.createElement('div');
+                card.className = 'gallery-card';
+                const img = document.createElement('div');
+                img.className = 'gallery-img';
+                img.style.backgroundImage = `url('${folder}/${prefix}${i}.jpg')`;
+                card.appendChild(img);
+                grid.appendChild(card);
             }
-        // Change the number from 30 to 37 for the SANSHE gallery
-            generateGallery('grid-sanshe', 'SansheImg', 'sanImg', 37);
-            generateGallery('grid-osa', 'OsImg', 'osImg', 30);
-            generateGallery('grid-sharm', 'ShImg', 'shImg', 30);
-            generateGallery('grid-venus', 'VenImg', 'venImg', 30);
+        }
+
+        generateGallery('grid-sanshe', 'SansheImg', 'sanImg', 37);
+        generateGallery('grid-osa', 'OsImg', 'osImg', 30);
+        generateGallery('grid-sharm', 'ShImg', 'shImg', 30);
+        generateGallery('grid-venus', 'VenImg', 'venImg', 30);
+
         const langBtn = document.getElementById('langBtn');
         let currentLang = 'en';
 
@@ -284,7 +429,7 @@
                 document.getElementById('brand-name').textContent = "الجينت";
                 document.getElementById('brand-sub').textContent = "هوم";
                 document.getElementById('nav-home').textContent = "الرئيسية";
-                document.getElementById('nav-supplies').textContent = " توريدات  وتجارة ";
+                document.getElementById('nav-supplies').textContent = " توريدات وتجارة ";
             } else {
                 document.getElementById('brand-name').textContent = "Elegant";
                 document.getElementById('brand-sub').textContent = "Home";
@@ -298,7 +443,7 @@
         });
     </script>
     <button id="scrollToTopBtn" aria-label="Scroll to top" title="Go to top">✦</button>
-    
+
     <style>
         /* Scroll to Top Button Styling */
         #scrollToTopBtn {
@@ -318,35 +463,33 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    
+
             /* Animation States */
             opacity: 0;
             visibility: hidden;
             transform: translateY(20px);
             transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease, background-color 0.3s ease, color 0.3s ease;
         }
-    
-        /* Show State triggered by JavaScript */
+
+        /* Show State */
         #scrollToTopBtn.show {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
         }
-    
+
         /* Elegant Hover Transition effect */
         #scrollToTopBtn:hover {
             background-color: var(--gold, #C5A059);
             color: var(--dark-brown, #2C1B18);
             box-shadow: 0 6px 20px rgba(197, 160, 89, 0.4);
         }
-    
-        /* Dynamic Adjustments for RTL/Arabic layout structure */
+
         body.rtl #scrollToTopBtn {
             right: auto;
             left: 30px;
         }
-    
-        /* Responsive Breakpoints: Tablet (iPad) & Mobile Devices */
+
         @media (max-width: 768px) {
             #scrollToTopBtn {
                 bottom: 20px;
@@ -355,19 +498,33 @@
                 height: 44px;
                 font-size: 1.25rem;
             }
-    
+
             body.rtl #scrollToTopBtn {
                 right: auto;
                 left: 20px;
             }
         }
     </style>
-    
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const scrollBtn = document.getElementById("scrollToTopBtn");
+            const menuToggle = document.getElementById("menuToggle");
+            const navLinks = document.getElementById("navLinks");
 
-            // Monitor window scroll coordinates to reveal or conceal button
+            // Mobile downward click accordion dropdown function
+            menuToggle.addEventListener("click", function (e) {
+                e.stopPropagation();
+                navLinks.classList.toggle("active");
+            });
+
+            // Close layout drawer if user clicks outside content bounds
+            document.addEventListener("click", function (e) {
+                if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+                    navLinks.classList.remove("active");
+                }
+            });
+
             window.addEventListener("scroll", function () {
                 if (window.pageYOffset > 300) {
                     scrollBtn.classList.add("show");
@@ -376,7 +533,6 @@
                 }
             });
 
-            // Smooth linear animation scroll interaction
             scrollBtn.addEventListener("click", function () {
                 window.scrollTo({
                     top: 0,
