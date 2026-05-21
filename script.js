@@ -12,7 +12,7 @@ const content = {
         title: "Commercial Services <i>& Contracting</i>",
         desc: "Our mission is to make the customer confident in our service and reassured in every step.",
         san: "Sanshe Sharm", osa: "Osa", sha: "Sharm Electrical", ven: "Venus",
-        led: "LED Lighting", outdor: "Outdor Lighting", indor: "Indor Lighting",
+        led: "LED Lighting", outdoor: "Outdoor Lighting", indoor: "Indoor Lighting",
         elec: "Electrical", fans: "Exhaust Fans", chan: "Chandeliers",
 
         // New About & Footer English translations
@@ -36,7 +36,7 @@ const content = {
         title: "للخدمات التجارية و <i>المقاولات</i>",
         desc: "مهمتنا هي جعل العميل واثقاً في خدمتنا ومطمئناً في كل خطوة.",
         san: "سانشي", osa: "أوسا", sha: "شرم", ven: "فينوس",
-        led: "إضاءة LED", outdor: "إضاءة خارجية", indor: "إضاءة داخلية",
+        led: "إضاءة LED", outdoor: "إضاءة خارجية", indoor: "إضاءة داخلية",
         elec: "كهربائيات", fans: "مراوح شفط", chan: "نجف",
 
         // New About & Footer Arabic translations
@@ -79,8 +79,8 @@ document.getElementById('langBtn').addEventListener('click', () => {
     document.getElementById('sub-sha').innerText = content[currentLang].sha;
     document.getElementById('sub-ven').innerText = content[currentLang].ven;
     document.getElementById('sub-led').innerText = content[currentLang].led;
-    document.getElementById('sub-outdor').innerText = content[currentLang].outdor;
-    document.getElementById('sub-indor').innerText = content[currentLang].indor;
+    document.getElementById('sub-outdoor').innerText = content[currentLang].outdoor;
+    document.getElementById('sub-indoor').innerText = content[currentLang].indoor;
     document.getElementById('sub-elec').innerText = content[currentLang].elec;
     document.getElementById('sub-fans').innerText = content[currentLang].fans;
 

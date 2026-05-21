@@ -370,20 +370,20 @@
         <div class="tab-buttons">
             <button class="tab-btn active" onclick="openTab(event, 'led')" data-en="LED LIGHTING"
                 data-ar="إضاءة LED">LED LIGHTING</button>
-            <button class="tab-btn" onclick="openTab(event, 'indor')" data-en="INDOR LIGHTING"
-                data-ar="إضاءة داخلية">INDOR LIGHTING</button>
-            <button class="tab-btn" onclick="openTab(event, 'outdor')" data-en="OUTDOR LIGHTING"
-                data-ar="إضاءة خارجية">OUTDOR LIGHTING</button>
+            <button class="tab-btn" onclick="openTab(event, 'indoor')" data-en="INDOOR LIGHTING"
+                data-ar="إضاءة داخلية">INDOOR LIGHTING</button>
+            <button class="tab-btn" onclick="openTab(event, 'outdoor')" data-en="OUTDOOR LIGHTING"
+                data-ar="إضاءة خارجية">OUTDOOR LIGHTING</button>
         </div>
 
         <div id="tab-led" class="tab-content active">
             <div class="gallery-grid" id="grid-led"></div>
         </div>
-        <div id="tab-indor" class="tab-content">
-            <div class="gallery-grid" id="grid-indor"></div>
+        <div id="tab-indoor" class="tab-content">
+            <div class="gallery-grid" id="grid-indoor"></div>
         </div>
-        <div id="tab-outdor" class="tab-content">
-            <div class="gallery-grid" id="grid-outdor"></div>
+        <div id="tab-outdoor" class="tab-content">
+            <div class="gallery-grid" id="grid-outdoor"></div>
         </div>
     </main>
 
@@ -411,8 +411,8 @@
 
         // Initialize images matching your limits and extension types
         generateGallery('grid-led', 'LEDLight', 'led', 26);
-        generateGallery('grid-indor', 'indorLight', 'indor', 36);
-        generateGallery('grid-outdor', 'outdorLight', 'outdor', 14);
+        generateGallery('grid-indoor', 'IndoorLight', 'indor', 36);
+        generateGallery('grid-outdoor', 'OutdoorLight', 'outdor', 14);
 
         // Lang Switch Logic precisely styled like supplies&trading.html
         const langBtn = document.getElementById('langBtn');
