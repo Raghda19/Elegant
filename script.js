@@ -36,7 +36,7 @@ const content = {
         title: "للخدمات التجارية و <i>المقاولات</i>",
         desc: "مهمتنا هي جعل العميل واثقاً في خدمتنا ومطمئناً في كل خطوة.",
         san: "سانشي", osa: "أوسا", sha: "شرم", ven: "فينوس",
-        led: "إضاءة LED", outdoor: "إضاءة خارجية", indoor: "إضاءة داخلية",
+        led: "إضاءة LED", outdor: "إضاءة خارجية", indor: "إضاءة داخلية",
         elec: "كهربائيات", fans: "مراوح شفط", chan: "نجف",
 
         // New About & Footer Arabic translations
